@@ -5,6 +5,13 @@ purpose of the file is to pass control to the app’s first module.
 */
 
 import { Application } from '@nativescript/core'
+import { UIDataDriver, registerSwiftUI } from '@nativescript/swift-ui';
+
+declare var VisionProViewProvider: any;
+registerSwiftUI(
+  "visionPro",
+  (view) => new UIDataDriver(VisionProViewProvider.alloc().init(), view)
+);
 
 Application.run({ moduleName: 'app-root' })
 
