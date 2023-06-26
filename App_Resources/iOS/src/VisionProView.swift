@@ -1,4 +1,5 @@
 import SwiftUI
+ import RealityKit
 
 class StarterData: ObservableObject {
     @Published var props: NSMutableDictionary = [:]
@@ -10,8 +11,15 @@ class StarterData: ObservableObject {
 struct VisionProView: View {
     @State var data = StarterData()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+//        Text("Hello, world!")
+//            .padding()
+         Model3D(named: "Globe") { model in
+             model
+                 .resizable()
+                 .scaledToFit()
+         } placeholder: {
+             ProgressView()
+         }
     }
     // The view model.
     // @State private var model = ViewModel()

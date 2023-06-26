@@ -3,8 +3,8 @@
 
     <StackLayout class="p-5">
         <Label text="Tap the button" class="text-lg text-center" />
-        <Button text="TAP" tap="{{ onTap }}" class="rounded-md bg-blue text-white" />
+        <Button text="TAP" tap="{{ onTap }}" class="rounded-full  text-white bg-sky-500 my-5 p-2 text-xl" />
         <Label text="{{ message }}" class="text-center" textWrap="true" />
-        <sui:SwiftUI id="visionPro" />
+        <sui:SwiftUI swiftId="visionPro" />
     </StackLayout>
 </Page>
