@@ -1,5 +1,22 @@
 import SwiftUI
- import RealityKit
+import RealityKit
+
+// @main
+// struct VisionProStarter: App {
+    
+//     var body: some Scene {
+
+// //        WindowGroup {
+// //            VisionProView(isShowing: false)
+// //        }
+        
+//         WindowGroup(id: "planet-earth") {
+//             Model3D(named: "Globe")
+//         }
+//         .windowStyle(.volumetric)
+//         .defaultSize(width: 0.8, height: 0.8, depth: 0.8, in: .meters)
+//     }
+// }
 
 class StarterData: ObservableObject {
     @Published var props: NSMutableDictionary = [:]
@@ -10,16 +27,30 @@ class StarterData: ObservableObject {
 // @main
 struct VisionProView: View {
     @State var data = StarterData()
+//    @Binding var isShowing: Bool
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
+    
     var body: some View {
 //        Text("Hello, world!")
 //            .padding()
-         Model3D(named: "Globe") { model in
-             model
-                 .resizable()
-                 .scaledToFit()
-         } placeholder: {
-             ProgressView()
-         }
+        // Toggle("Open Your World!", isOn: $isShowing)
+        //             .onChange(of: isShowing) { wasShowing, isShowing in
+        //                 if isShowing {
+        //                     openWindow(id: "planet-earth")
+        //                 } else {
+        //                     dismissWindow(id: "planet-earth")
+        //                 }
+        //             }
+        //             .toggleStyle(.button)
+        
+        Model3D(named: "Globe") { model in
+            model
+                .resizable()
+                .scaledToFit()
+        } placeholder: {
+            ProgressView()
+        }
     }
     // The view model.
     // @State private var model = ViewModel()
@@ -67,4 +98,16 @@ struct VisionProView: View {
     //     // SunPositionComponent.registerComponent()
     //     // SunPositionSystem.registerSystem()
     // }
+}
+
+struct GlobeModule: View {
+    var body: some View {
+        Model3D(named: "Globe") { model in
+            model
+                .resizable()
+                .scaledToFit()
+        } placeholder: {
+              ProgressView()
+        }
+    }
 }

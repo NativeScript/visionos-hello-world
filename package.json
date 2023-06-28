@@ -3,16 +3,20 @@
   "main": "app/app.ts",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "ios": "ns debug ios"
+  },
   "dependencies": {
     "@nativescript/core": "vision",
-    "@nativescript/swift-ui": "^1.1.0"
+    "@nativescript/swift-ui": "vision"
   },
   "devDependencies": {
-    "@nativescript/ios": "8.6.0-vision.1",
+    "@nativescript/ios": "vision",
     "@nativescript/tailwind": "~2.0.1",
     "@nativescript/types": "~8.5.0",
-    "@nativescript/webpack": "~5.0.14",
-    "tailwindcss": "3.2.6",
+    "@nativescript/webpack": "~5.0.16",
+    "nativescript": "vision",
+    "tailwindcss": "3.2.7",
     "typescript": "~5.0.0"
   }
 }
