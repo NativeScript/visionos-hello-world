@@ -1,0 +1,79 @@
+import SwiftUI
+import NativeScriptEmbedder
+import UIKit
+
+@main
+struct NativeScriptApp: App {
+    
+    init() {
+        NativeScriptEmbedder.sharedInstance().setDelegate(NativeScriptViewRegistry.shared)
+        NativeScriptStart.setup()
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            NativeScriptAppView().onAppear {
+                print("NativeScriptAppView onAppear")
+                DispatchQueue.main.async {
+                    NativeScriptStart.boot()
+                }
+            }
+        }
+
+        // requires adding "Local" Swift package from Desktop/TestVisionProject/Packages/RealityKitContent
+        // NOTE: need to work with Igor to allow CLI SPM support to pick up local packages
+        ImmersiveSpace(id: "ImmersiveSpace") {
+            VisionProScene()
+        }
+    }
+}
+
+// NOTE: this may could go into @nativescript/swift-ui, not sure yet
+
+struct NativeScriptAppView: UIViewRepresentable {
+  
+    func makeUIView(context: Context) -> UIView {
+        print("make NativeScriptAppView")
+        return NativeScriptViewRegistry.app.view
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        print("NativeScriptAppView updateUIView")
+        // could update data through the controller
+    }
+}
+
+@objc public class NativeScriptViewRegistry: NSObject, NativeScriptEmbedderDelegate {
+    @objc public static let shared = NativeScriptViewRegistry()
+    @objc public static let app = UIKitContainerCtrl()
+
+    @objc public let views = NSMutableDictionary()
+    @objc public var callback: ((String, UIKitContainerView) -> Void)? = nil
+    
+    public func presentNativeScriptApp(_ vc: UIViewController!) -> Any! {
+        vc.view.frame = NativeScriptViewRegistry.app.view.bounds
+        vc.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        NativeScriptViewRegistry.app.addChild(vc)
+        NativeScriptViewRegistry.app.view.addSubview(vc.view)
+        vc.didMove(toParent: NativeScriptViewRegistry.app)
+        return NativeScriptViewRegistry.app
+    }
+}
+
+// UIViewController
+@objc public class UIKitContainerCtrl: UIViewController {
+    // allow NativeScript to override updateData for custom handling
+    @objc public var updateData: ((_ data: NSMutableDictionary) -> Void)? = nil
+}
+
+// UIView
+@objc public class UIKitContainerView: UIView {
+    // allow NativeScript to override updateData for custom handling
+    @objc public var updateData: ((_ data: NSMutableDictionary) -> Void)? = nil
+}
+
+// Notes:
+// importing RealityKit causes App protocol to fail:
+// Type 'VisionProApp' does not conform to protocol 'App'
+// (likely expected, just interesting)
+//import RealityKit

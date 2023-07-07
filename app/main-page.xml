@@ -1,10 +1,42 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" xmlns:sui="@nativescript/swift-ui">
-    <ActionBar title="NativeScript Vision Pro Starter" icon="" />
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo"
+    xmlns:sui="@nativescript/swift-ui">
+    <!-- Original starter base setup -->
+    <!-- <ActionBar title="NativeScript Vision Pro Starter" icon="" />
 
     <StackLayout class="p-5">
         <Label text="Tap the button" class="text-lg text-center" />
         <Button text="TAP" tap="{{ onTap }}" class="rounded-full  text-white bg-sky-500 my-5 p-2 text-xl" />
         <Label text="{{ message }}" class="text-center" textWrap="true" />
         <sui:SwiftUI swiftId="visionPro" />
-    </StackLayout>
+    </StackLayout> -->
+
+    <GridLayout rows="" columns="">
+        <GridLayout loaded="{{loadedBg}}">
+            <Image src="res://SunSliver" class="align-top w-full" iosOverflowSafeArea="true" stretch="aspectFit" scaleY="1.6" scaleX="1.6" translateY="30"/>
+            <Image src="res://EarthHalf" class="align-bottom w-full" iosOverflowSafeArea="true" stretch="aspectFill" scaleY="2" scaleX="2" translateY="540"/>
+
+        </GridLayout>
+
+        <sui:SwiftUI swiftId="title" swiftUIEvent="{{ onTitleFinished }}" class="align-middle" />
+
+        <GridLayout rows="auto,100" columns="auto,30,auto,30,auto" class="align-bottom h-center" loaded="{{loadedTOC}}">
+            <StackLayout id="globe" col="0" width="330" tap="{{openDetail}}">
+                <Label text="{{ data.eyebrow('globe')}}" class="text-[17px] font-semibold text-white/50" />
+                <Label text="{{ data.heading('globe')}}" class="text-[30px] font-bold mt-1" />
+                <Label text="{{ data.abstract('globe')}}" class="text-[18px] font-semibold mt-2" textWrap="true" />
+            </StackLayout>
+
+            <StackLayout id="orbit" col="2" width="330" tap="{{openDetail}}">
+                <Label text="{{ data.eyebrow('orbit')}}" class="text-[17px] font-semibold text-white/50" />
+                <Label text="{{ data.heading('orbit')}}" class="text-[30px] font-bold mt-1" />
+                <Label text="{{ data.abstract('orbit')}}" class="text-[18px] font-semibold mt-2" textWrap="true" />
+            </StackLayout>
+
+            <StackLayout id="solar" col="4" width="330" tap="{{openDetail}}">
+                <Label text="{{ data.eyebrow('solar')}}" class="text-[17px] font-semibold text-white/50" />
+                <Label text="{{ data.heading('solar')}}" class="text-[30px] font-bold mt-1" />
+                <Label text="{{ data.abstract('solar')}}" class="text-[18px] font-semibold mt-2" textWrap="true" />
+            </StackLayout>
+        </GridLayout>
+    </GridLayout>
 </Page>

@@ -11,13 +11,13 @@ npm install
 ## 2. Get your Vision Pro Device ID
 
 ```bash
-npx ns device ios --available-devices
+npx ns devices ios --available-devices
 ```
 
 Should print a list like this:
 
 ```bash
-visionos-starter $ npx ns device ios --available-devices
+visionos-starter $ npx ns devices ios --available-devices
 
 │ Device Name │ Platform │ Version │ Device Identifier | Image Identifier |
 | --- | --- | --- | --- | --- |

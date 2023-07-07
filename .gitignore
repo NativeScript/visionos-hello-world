@@ -27,3 +27,6 @@ package-lock.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# TMP: include these in final example
+Packages

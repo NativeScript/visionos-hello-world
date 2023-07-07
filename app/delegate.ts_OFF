@@ -1,0 +1,154 @@
+import { Application } from "@nativescript/core";
+import { UIDataDriver } from "@nativescript/swift-ui";
+
+@NativeClass()
+export class AppDelegateImpl
+  extends UIResponder
+  implements UIApplicationDelegate
+{
+  static ObjCProtocols = [UIApplicationDelegate];
+
+  applicationDidFinishLaunchingWithOptions(
+    application: UIApplication,
+    launchOptions: NSDictionary<string, any>
+  ): boolean {
+    console.log("applicationDidFinishLaunchingWithOptions");
+    return true;
+  }
+  applicationConfigurationForConnectingSceneSessionOptions?(
+    application: UIApplication,
+    connectingSceneSession: UISceneSession,
+    options: UISceneConnectionOptions
+  ): UISceneConfiguration {
+    console.log(
+      "applicationConfigurationForConnectingSceneSessionOptions:",
+      connectingSceneSession.configuration.name
+    );
+    const config = UISceneConfiguration.configurationWithNameSessionRole(
+      connectingSceneSession.configuration.name,
+      connectingSceneSession.role
+    );
+    const activityType = <NSSet<string>>(
+      options.userActivities.valueForKey("activityType")
+    );
+    console.log(`activityType:`, activityType);
+    const activityValues = activityType.allObjects;
+    // console.log('activityValues:', activityValues);
+    console.log("activityValues.firstObject:", activityValues.firstObject);
+
+    switch (activityValues.firstObject) {
+      case "Earth":
+        console.log("HERE!");
+        config.delegateClass = EarthSceneDelegateImpl.class();
+        break;
+      default:
+        config.delegateClass = MainSceneDelegateImpl.class();
+        break;
+    }
+
+    // switch (connectingSceneSession.configuration.name) {
+    //   case "Main":
+    //     config.delegateClass = MainSceneDelegateImpl.class();
+    //     break;
+    //   case "Earth":
+    //     config.delegateClass = EarthSceneDelegateImpl.class();
+    //     break;
+    // }
+
+    return config;
+  }
+
+  applicationDidDiscardSceneSessions?(
+    application: UIApplication,
+    sceneSessions: NSSet<UISceneSession>
+  ): void {
+    console.log("applicationDidDiscardSceneSessions:", sceneSessions);
+  }
+}
+
+declare var VisionProSceneProvider: any;
+
+@NativeClass()
+class MainSceneDelegateImpl extends NSObject implements UISceneDelegate {
+  static ObjCProtocols = [UISceneDelegate];
+
+  sceneWillConnectToSessionOptions(
+    scene: UIScene,
+    session: UISceneSession,
+    connectionOptions: UISceneConnectionOptions
+  ): void {
+    console.log("sceneWillConnectToSessionOptions:", scene);
+    // A new scene was added to the app.
+
+    if (scene instanceof UIWindowScene) {
+      let window = UIWindow.alloc().initWithWindowScene(scene);
+
+      // This approach avoids the error:
+      // Manually adding the rootViewController’s view to the view hierarchy is no longer supported. Please allow UIWindow to add the rootViewController’s view to the view hierarchy itself.
+      // https://www.sminrana.com/ios/manually-adding-the-rootviewcontrollers-view-to-the-view-hierarchy-is-no-longer-supported-please-allow-uiwindow-to-add-the-rootviewcontrollers-view-to-the-view-hierarchy-itself/
+      const dummy = UIView.alloc().initWithFrame(CGRectMake(0, 0, 1, 1));
+      //   dummy.backgroundColor = UIColor.whiteColor;
+
+      UIView.transitionFromViewToViewDurationOptionsCompletion(
+        Application.ios.rootController?.view || UIView.new(),
+        dummy,
+        0.2,
+        UIViewAnimationOptions.CurveEaseInOut,
+        (completed) => {
+          if (completed) {
+            window.rootViewController = Application.ios.rootController;
+            window.makeKeyAndVisible();
+          }
+        }
+      );
+
+      //   window.rootViewController = Application.ios.rootController;
+      //   window.makeKeyAndVisible();
+    }
+  }
+}
+
+@NativeClass()
+class EarthSceneDelegateImpl extends NSObject implements UISceneDelegate {
+  static ObjCProtocols = [UISceneDelegate];
+
+  sceneWillConnectToSessionOptions(
+    scene: UIScene,
+    session: UISceneSession,
+    connectionOptions: UISceneConnectionOptions
+  ): void {
+    console.log(
+      "EarthSceneDelegateImpl sceneWillConnectToSessionOptions:",
+      scene
+    );
+    // A new scene was added to the app.
+
+    console.log('scene:', typeof scene);
+    if (scene?.constructor) {
+        console.log('scene.constructor.name:', scene.constructor.name);
+    }
+
+    VisionProSceneProvider.alloc().init()
+
+    // if (scene instanceof UIWindowScene) {
+    //   let window = UIWindow.alloc().initWithWindowScene(scene);
+    //   // window.rootViewController = Application.ios.rootController;
+
+    //   const dummy = UIView.alloc().initWithFrame(CGRectMake(0, 0, 1, 1));
+    //   //   dummy.backgroundColor = UIColor.whiteColor;
+
+    //   UIView.transitionFromViewToViewDurationOptionsCompletion(
+    //     Application.ios.rootController.view,
+    //     dummy,
+    //     0.2,
+    //     UIViewAnimationOptions.CurveEaseInOut,
+    //     (completed) => {
+    //       if (completed) {
+    //         window.rootViewController = VisionProSceneProvider.alloc().init();
+    //         window.makeKeyAndVisible();
+    //       }
+    //     }
+    //   );
+    // }
+  }
+}

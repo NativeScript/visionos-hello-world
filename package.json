@@ -1,5 +1,5 @@
 {
-  "name": "visionos-starter",
+  "name": "visionos-hello-world",
   "main": "app/app.ts",
   "version": "1.0.0",
   "private": true,
@@ -15,7 +15,6 @@
     "@nativescript/tailwind": "~2.0.1",
     "@nativescript/types": "~8.5.0",
     "@nativescript/webpack": "~5.0.16",
-    "nativescript": "vision",
     "tailwindcss": "3.2.7",
     "typescript": "~5.0.0"
   }

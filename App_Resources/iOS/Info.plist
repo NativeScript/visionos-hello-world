@@ -52,12 +52,32 @@
       <key>NSAllowsArbitraryLoadsInWebContent</key>
       <true/>
     </dict>
-	<!-- <key>UIApplicationSceneManifest</key>
+	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<true/>
 		<key>UISceneConfigurations</key>
 		<dict/>
-	</dict> -->
+
+		<!-- <key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Main</string>
+				</dict>
+			</array>
+			<key>UISceneSessionRoleImmersiveSpaceApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Earth</string>
+				</dict>
+			</array>
+		</dict> -->
+	</dict>
 </dict>
 </plist>

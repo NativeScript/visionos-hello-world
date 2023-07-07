@@ -1,38 +1,49 @@
-import { Observable } from '@nativescript/core'
+import { CoreTypes, Frame, GridLayout, Observable } from '@nativescript/core'
+import { Data, getIntroFinished, setIntroFinished } from './data';
+import { SwiftUIEventData } from '@nativescript/swift-ui';
+
 
 export class HelloWorldModel extends Observable {
-  private _counter: number
-  private _message: string
+  bgImages: GridLayout;
+  toc: GridLayout;
+  data = Data;
 
-  constructor() {
-    super()
+  openDetail(args) {
+    const id = args.object.id;
+    console.log('id:', id)
 
-    // Initialize default values.
-    this._counter = 42
-    this.updateMessage()
+    Frame.topmost().navigate({
+      moduleName: `detail`,
+      context: id
+    });
   }
 
-  get message(): string {
-    return this._message
+  onTitleFinished(evt: SwiftUIEventData<any>) {
+    console.log('onIntroFinished:', evt.data)
+    setIntroFinished(true);
+    this.bgImages.animate({
+      opacity: 1,
+      duration: 800,
+      curve: CoreTypes.AnimationCurve.easeInOut
+    });
+    this.toc.animate({
+      opacity: 1,
+      duration: 800,
+      curve: CoreTypes.AnimationCurve.easeInOut
+    });
   }
 
-  set message(value: string) {
-    if (this._message !== value) {
-      this._message = value
-      this.notifyPropertyChange('message', value)
+  loadedBg(args) {
+    this.bgImages = args.object;
+    if (!getIntroFinished()) {
+      this.bgImages.opacity = 0;
     }
   }
 
-  onTap() {
-    this._counter--
-    this.updateMessage()
-  }
-
-  private updateMessage() {
-    if (this._counter <= 0) {
-      this.message = 'Hoorraaay! You unlocked the NativeScript clicker achievement!'
-    } else {
-      this.message = `${this._counter} taps left`
+  loadedTOC(args) {
+    this.toc = args.object;
+    if (!getIntroFinished()) {
+      this.toc.opacity = 0;
     }
   }
 }

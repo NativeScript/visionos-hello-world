@@ -1,0 +1,35 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo"
+    xmlns:sui="@nativescript/swift-ui">
+
+    <Page.actionBar>
+        <ActionBar>
+            <Label text="{{data.eyebrow(id)}}"/>
+            <NavigationButton loaded="{{loadedNavButton}}" />
+        </ActionBar>
+    </Page.actionBar>
+
+    <GridLayout rows="" columns="">
+        <Image src="res://SolarBackground" stretch="none" class="h-right align-bottom" visibility="{{ id === 'solar' ? 'visible' : 'collapsed' }}" />
+        <GridLayout columns="*,50,*" class="px-20">
+            <StackLayout col="0" class="align-middle">
+                <Label text="{{ data.heading(id)}}" class="text-[50px] font-bold mt-1" />
+                <Label text="{{ data.overview(id)}}" class="text-[20px] font-semibold mt-3" textWrap="true" />
+                <Button text="View Globe" tap="{{toggleSpace}}" class="rounded-full mt-6 w-[270px] bg-white/20 text-lg p-2 h-left"/>
+            </StackLayout>
+            <StackLayout col="2" class="align-middle" visibility="{{ id === 'globe' || id === 'solar' ? 'visible' : 'collapsed' }}">
+                <Image src="{{id === 'globe' ? 'res://GlobeHero' : 'res://SolarHero'}}" stretch="none" />
+            </StackLayout>
+            <GridLayout col="2" rows="*,auto" class="align-middle" visibility="{{ id === 'orbit' ? 'visible' : 'collapsed' }}">
+                <Label text="swiftui here" textWrap="true" />
+
+                <SegmentedBar row="1" selectedIndexChanged="{{selectedIndexChanged}}" width="350" class="h-center">
+                    <SegmentedBar.items>
+                        <SegmentedBarItem title="Satellite" />
+                        <SegmentedBarItem title="Moon" />
+                        <SegmentedBarItem title="Telescope" />
+                    </SegmentedBar.items>
+                </SegmentedBar>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+</Page>
