@@ -29,23 +29,23 @@ struct ModuleDetail: View {
                         Text(module.overview)
                             .padding(.bottom, 30)
 
-                        switch module {
-                        case .globe:
-                            WindowToggle(
-                                title: module.callToAction,
-                                id: module.name,
-                                isShowing: $model.isShowingGlobe)
-                        case .orbit:
-                            SpaceToggle(
-                                title: module.callToAction,
-                                id: module.name,
-                                isShowing: $model.isShowingOrbit)
-                        case .solar:
-                            SpaceToggle(
-                                title: module.callToAction,
-                                id: module.name,
-                                isShowing: $model.isShowingSolar)
-                        }
+//                        switch module {
+//                        case .globe:
+//                            WindowToggle(
+//                                title: module.callToAction,
+//                                id: module.name,
+//                                isShowing: $model.isShowingGlobe)
+//                        case .orbit:
+//                            SpaceToggle(
+//                                title: module.callToAction,
+//                                id: module.name,
+//                                isShowing: $model.isShowingOrbit)
+//                        case .solar:
+//                            SpaceToggle(
+//                                title: module.callToAction,
+//                                id: module.name,
+//                                isShowing: $model.isShowingSolar)
+//                        }
                     }
                     .frame(width: textWidth, alignment: .leading)
 
@@ -84,51 +84,51 @@ extension Module {
 
 /// A toggle that activates or deactivates a window with
 /// the specified identifier.
-private struct WindowToggle: View {
-    var title: String
-    var id: String
-    @Binding var isShowing: Bool
-
-    @Environment(\.openWindow) private var openWindow
-    @Environment(\.dismissWindow) private var dismissWindow
-
-    var body: some View {
-        Toggle(title, isOn: $isShowing)
-            .onChange(of: isShowing) { wasShowing, isShowing in
-                if isShowing {
-                    openWindow(id: id)
-                } else {
-                    dismissWindow(id: id)
-                }
-            }
-            .toggleStyle(.button)
-    }
-}
-
-/// A toggle that activates or deactivates the immersive space with
-/// the specified identifier.
-private struct SpaceToggle: View {
-    var title: String
-    var id: String
-    @Binding var isShowing: Bool
-
-    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
-    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
-
-    var body: some View {
-        Toggle(title, isOn: $isShowing)
-            .onChange(of: isShowing) { wasShowing, isShowing in
-                Task {
-                    if isShowing {
-                        await openImmersiveSpace(id: id)
-                    } else {
-                        await dismissImmersiveSpace()
-                    }
-                }
-            }
-            .toggleStyle(.button)
-    }
-}
+//private struct WindowToggle: View {
+//    var title: String
+//    var id: String
+//    @Binding var isShowing: Bool
+//
+//    @Environment(\.openWindow) private var openWindow
+//    @Environment(\.dismissWindow) private var dismissWindow
+//
+//    var body: some View {
+//        Toggle(title, isOn: $isShowing)
+//            .onChange(of: isShowing) { wasShowing, isShowing in
+//                if isShowing {
+//                    openWindow(id: id)
+//                } else {
+//                    dismissWindow(id: id)
+//                }
+//            }
+//            .toggleStyle(.button)
+//    }
+//}
+//
+///// A toggle that activates or deactivates the immersive space with
+///// the specified identifier.
+//private struct SpaceToggle: View {
+//    var title: String
+//    var id: String
+//    @Binding var isShowing: Bool
+//
+//    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+//    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
+//
+//    var body: some View {
+//        Toggle(title, isOn: $isShowing)
+//            .onChange(of: isShowing) { wasShowing, isShowing in
+//                Task {
+//                    if isShowing {
+//                        await openImmersiveSpace(id: id)
+//                    } else {
+//                        await dismissImmersiveSpace()
+//                    }
+//                }
+//            }
+//            .toggleStyle(.button)
+//    }
+//}
 
 #Preview("Globe") {
     NavigationStack {

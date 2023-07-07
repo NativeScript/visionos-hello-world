@@ -7,17 +7,12 @@ import WorldAssets
 @main
 struct NativeScriptApp: App {
 
-    // // The view model.
-    // @State private var model = ViewModel()
+    // The view model.
+    @State private var model = ViewModel()
 
-    // // The immersion styles for different modules.
-    // @State private var orbitImmersionStyle: ImmersionStyle = .mixed
-    // @State private var solarImmersionStyle: ImmersionStyle = .full
-
-    init() {
-        NativeScriptEmbedder.sharedInstance().setDelegate(NativeScriptViewRegistry.shared)
-        NativeScriptStart.setup()
-    }
+    // The immersion styles for different modules.
+    @State private var orbitImmersionStyle: ImmersionStyle = .mixed
+    @State private var solarImmersionStyle: ImmersionStyle = .full
 
     var body: some Scene {
         // The main window that presents the app's modules.
@@ -30,47 +25,41 @@ struct NativeScriptApp: App {
             }
         }
         .windowStyle(.plain)
+        
+        // A volume that displays a globe.
+        WindowGroup(id: "Globe") {
+             Globe()
+                 .environment(model)
+         }
+         .windowStyle(.volumetric)
+         .defaultSize(width: 0.6, height: 0.6, depth: 0.6, in: .meters)
+        
+        // An immersive space that places the Earth with some of its satellites
+        // in your surroundings.
+        ImmersiveSpace(id: "Orbit") {
+            Orbit()
+                .environment(model)
+        }
+        .immersionStyle(selection: $orbitImmersionStyle, in: .mixed)
+
+        // An immersive Space that shows the Earth, Moon, and Sun as seen from
+        // Earth orbit.
+        ImmersiveSpace(id: "Solar") {
+            SolarSystem()
+                .environment(model)
+        }
+        .immersionStyle(selection: $solarImmersionStyle, in: .full)
     }
 
-    // var body: some Scene {
-    //     // The main window that presents the app's modules.
-    //     WindowGroup("Hello, world", id: "modules") {
-    //         Modules()
-    //             .environment(model)
-    //     }
-    //     .windowStyle(.plain)
-
-    //     // A volume that displays a globe.
-    //     WindowGroup(id: Module.globe.name) {
-    //         Globe()
-    //             .environment(model)
-    //     }
-    //     .windowStyle(.volumetric)
-    //     .defaultSize(width: 0.6, height: 0.6, depth: 0.6, in: .meters)
-
-    //     // An immersive space that places the Earth with some of its satellites
-    //     // in your surroundings.
-    //     ImmersiveSpace(id: Module.orbit.name) {
-    //         Orbit()
-    //             .environment(model)
-    //     }
-    //     .immersionStyle(selection: $orbitImmersionStyle, in: .mixed)
-
-    //     // An immersive Space that shows the Earth, Moon, and Sun as seen from
-    //     // Earth orbit.
-    //     ImmersiveSpace(id: Module.solar.name) {
-    //         SolarSystem()
-    //             .environment(model)
-    //     }
-    //     .immersionStyle(selection: $solarImmersionStyle, in: .full)
-    // }
-    
-    // init() {
-    //     RotationComponent.registerComponent()
-    //     TraceComponent.registerComponent()
-    //     SunPositionComponent.registerComponent()
-    //     SunPositionSystem.registerSystem()
-    // }
+    init() {
+        NativeScriptEmbedder.sharedInstance().setDelegate(NativeScriptViewRegistry.shared)
+        NativeScriptStart.setup()
+        
+        RotationComponent.registerComponent()
+        TraceComponent.registerComponent()
+        SunPositionComponent.registerComponent()
+        SunPositionSystem.registerSystem()
+    }
 }
 
 // NOTE: could be in different files, just putting everything here for demo
@@ -153,6 +142,128 @@ struct IntroText: View {
                 finished()
             }
         })
+    }
+}
+
+class DetailToggleButtonProviderBase: UIViewController, SwiftUIProvider {
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  required public init() {
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  func updateData(data: NSDictionary) {}
+
+  var onEvent: ((NSDictionary) -> ())?
+}
+
+@objc
+class DetailToggleGlobeProvider: DetailToggleButtonProviderBase {
+
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    setupSwiftUIView(content: DetailToggleButton(type: "globe"))
+  }
+}
+
+@objc
+class DetailToggleOrbitProvider: DetailToggleButtonProviderBase {
+
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    setupSwiftUIView(content: DetailToggleButton(type: "orbit"))
+  }
+}
+
+@objc
+class DetailToggleSolarProvider: DetailToggleButtonProviderBase {
+
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    setupSwiftUIView(content: DetailToggleButton(type: "solar"))
+  }
+}
+
+@Observable
+class DetailToggleButtonModel {
+    var isShowingGlobe: Bool = false
+    var isShowingOrbit: Bool = false
+    var isShowingSolar: Bool = false
+}
+
+struct DetailToggleButton: View {
+    @State var model = DetailToggleButtonModel()
+    var type: String
+    
+    var body: some View {
+        @Bindable var model = model
+        
+        switch type {
+        case "orbit":
+            SpaceToggle(
+                title: "View Orbits",
+                id: "Orbit",
+                isShowing: $model.isShowingOrbit)
+        case "solar":
+            SpaceToggle(
+                title: "View Outer Space",
+                id: "Solar",
+                isShowing: $model.isShowingSolar)
+        default:
+            WindowToggle(
+                title: "View Globe",
+                id: "Globe",
+                isShowing: $model.isShowingGlobe)
+        }
+    }
+}
+
+struct WindowToggle: View {
+    var title: String
+    var id: String
+    @Binding var isShowing: Bool
+
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
+
+    var body: some View {
+        Toggle(title, isOn: $isShowing)
+            .onChange(of: isShowing) { wasShowing, isShowing in
+                if isShowing {
+                    openWindow(id: id)
+                } else {
+                    dismissWindow(id: id)
+                }
+            }
+            .toggleStyle(.button)
+    }
+}
+
+/// A toggle that activates or deactivates the immersive space with
+/// the specified identifier.
+struct SpaceToggle: View {
+    var title: String
+    var id: String
+    @Binding var isShowing: Bool
+
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
+
+    var body: some View {
+        Toggle(title, isOn: $isShowing)
+            .onChange(of: isShowing) { wasShowing, isShowing in
+                Task {
+                    if isShowing {
+                        await openImmersiveSpace(id: id)
+                    } else {
+                        await dismissImmersiveSpace()
+                    }
+                }
+            }
+            .toggleStyle(.button)
     }
 }
 

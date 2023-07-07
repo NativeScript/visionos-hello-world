@@ -14,7 +14,8 @@
             <StackLayout col="0" class="align-middle">
                 <Label text="{{ data.heading(id)}}" class="text-[50px] font-bold mt-1" />
                 <Label text="{{ data.overview(id)}}" class="text-[20px] font-semibold mt-3" textWrap="true" />
-                <Button text="View Globe" tap="{{toggleSpace}}" class="rounded-full mt-6 w-[270px] bg-white/20 text-lg p-2 h-left"/>
+                <sui:SwiftUI swiftId="{{id === 'globe' ? 'toggleGlobe' : (id === 'solar' ? 'toggleSolar' : 'toggleOrbit')}}" class="align-middle" />
+                <!-- <Button text="View Globe" tap="{{toggleSpace}}" class="rounded-full mt-6 w-[270px] bg-white/20 text-lg p-2 h-left"/> -->
             </StackLayout>
             <StackLayout col="2" class="align-middle" visibility="{{ id === 'globe' || id === 'solar' ? 'visible' : 'collapsed' }}">
                 <Image src="{{id === 'globe' ? 'res://GlobeHero' : 'res://SolarHero'}}" stretch="none" />

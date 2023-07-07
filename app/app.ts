@@ -21,6 +21,21 @@ registerSwiftUI(
   "title",
   (view) => new UIDataDriver(TitleViewProvider.alloc().init(), view)
 );
+declare var DetailToggleGlobeProvider: any;
+registerSwiftUI(
+  "toggleGlobe",
+  (view) => new UIDataDriver(DetailToggleGlobeProvider.alloc().init(), view)
+);
+declare var DetailToggleOrbitProvider: any;
+registerSwiftUI(
+  "toggleOrbit",
+  (view) => new UIDataDriver(DetailToggleOrbitProvider.alloc().init(), view)
+);
+declare var DetailToggleSolarProvider: any;
+registerSwiftUI(
+  "toggleSolar",
+  (view) => new UIDataDriver(DetailToggleSolarProvider.alloc().init(), view)
+);
 
 Application.run({ moduleName: 'app-root' })
 
