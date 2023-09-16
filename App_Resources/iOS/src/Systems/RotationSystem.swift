@@ -28,7 +28,7 @@ struct RotationSystem: System {
     init(scene: RealityKit.Scene) {}
 
     func update(context: SceneUpdateContext) {
-        for entity in context.entities(matching: Self.query, when: .rendering) {
+        for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
             guard let component: RotationComponent = entity.components[RotationComponent.self] else { continue }
             entity.setOrientation(.init(angle: component.speed * Float(context.deltaTime), axis: component.axis), relativeTo: entity)
         }

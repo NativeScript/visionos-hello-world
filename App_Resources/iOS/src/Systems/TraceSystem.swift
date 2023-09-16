@@ -32,7 +32,7 @@ struct TraceSystem: System {
     init(scene: Scene) { }
 
     func update(context: SceneUpdateContext) {
-        for satellite in context.entities(matching: Self.query, when: .rendering) {
+        for satellite in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
             var trace: TraceComponent = satellite.components[TraceComponent.self]!
             defer { satellite.components[TraceComponent.self] = trace }
 
