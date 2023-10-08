@@ -1,8 +1,6 @@
-**Build visionOS apps with NativeScript** - *A new reality awaits you*
+**Develop Vision Pro 🥽 apps with NativeScript** - *A new reality awaits you*
 
-<iframe style="width: 100%; min-height: 200px; aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/0c6pm22Psks" title="Developing for visionOS with NativeScript" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-visionOS apps flavored with Angular, React, Solid, Svelte, TypeScript and Vue
+https://github.com/NativeScript/visionos-hello-world/assets/457187/c5ea962e-440f-413a-ae86-29cc9d0c07a1
 
 - [Setup](#setup)
 - [Choose your preference](#choose-your-preference)
