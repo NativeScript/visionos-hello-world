@@ -1,0 +1,48 @@
+{
+  "name": "nativescript-angular",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nativescript-angular/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nativescript/nx:build",
+      "options": {
+        "noHmr": true,
+        "production": true,
+        "uglify": true,
+        "release": true,
+        "forDevice": true
+      }
+    },
+    "ios": {
+      "executor": "@nativescript/nx:build",
+      "options": {
+        "noHmr": true,
+        "platform": "ios",
+        "flags": "--env.watchNodeModules"
+      }
+    },
+    "vision": {
+			"executor": "@nativescript/nx:build",
+			"inputs": ["default", "^production"],
+			"outputs": [],
+			"options": {
+				"noHmr": true,
+				"debug": false,
+				"platform": "vision"
+			}
+		},
+    "android": {
+      "executor": "@nativescript/nx:build",
+      "options": {
+        "platform": "android"
+      }
+    },
+    "clean": {
+      "executor": "@nativescript/nx:build",
+      "options": {
+        "clean": true
+      }
+    }
+  }
+}

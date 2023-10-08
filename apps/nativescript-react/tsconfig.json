@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDirs": [".", "../.."],
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@vision/nativescript-data": [
+        "../../libs/nativescript-data/src/index.ts"
+      ]
+    }
+  }
+}

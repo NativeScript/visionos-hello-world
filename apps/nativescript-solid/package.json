@@ -1,0 +1,14 @@
+{
+  "name": "nssolid",
+  "main": "src/index.js",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@nativescript/core": "vision",
+    "@nativescript/swift-ui": "vision",
+    "@nativescript/tailwind": "*"
+  },
+  "devDependencies": {
+    "@nativescript/visionos": "latest"
+  }
+}

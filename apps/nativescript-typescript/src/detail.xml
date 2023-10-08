@@ -1,0 +1,26 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo"
+    xmlns:sui="@nativescript/swift-ui">
+
+    <Page.actionBar>
+        <ActionBar>
+            <Label text="{{ui.data.eyebrow(id)}}"/>
+        </ActionBar>
+    </Page.actionBar>
+
+    <GridLayout rows="" columns="">
+        <Image src="res://SolarBackground" stretch="none" class="h-right align-bottom" visibility="{{ id === 'solar' ? 'visible' : 'collapsed' }}" />
+        <GridLayout columns="*,50,*" class="px-20">
+            <StackLayout col="0" class="align-middle">
+                <Label text="{{ ui.data.heading(id)}}" class="text-[50px] font-bold mt-1" />
+                <Label text="{{ ui.data.overview(id)}}" class="text-[20px] font-semibold mt-3" textWrap="true" />
+                <sui:SwiftUI swiftId="{{id === 'globe' ? 'toggleGlobe' : (id === 'solar' ? 'toggleSolar' : 'toggleOrbit')}}" class="align-middle" />
+            </StackLayout>
+            <StackLayout col="2" class="align-middle" visibility="{{ id === 'globe' || id === 'solar' ? 'visible' : 'collapsed' }}">
+                <Image src="{{id === 'globe' ? 'res://GlobeHero' : 'res://SolarHero'}}" stretch="none" />
+            </StackLayout>
+            <GridLayout col="2" rows="*" class="align-middle" visibility="{{ id === 'orbit' ? 'visible' : 'collapsed' }}">
+                <sui:SwiftUI swiftId="orbitModule" data="{{orbitData}}" class="align-middle w-full h-full mb-8" />
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+</Page>

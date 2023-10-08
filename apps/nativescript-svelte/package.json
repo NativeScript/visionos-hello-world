@@ -1,0 +1,25 @@
+{
+  "name": "nssvelte",
+  "main": "src/app.ts",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "svelte-loader",
+      "svelte-native-preprocessor",
+      "svelte-preprocess"
+    ]
+  },
+  "dependencies": {
+    "@nativescript/core": "vision",
+    "@nativescript/swift-ui": "vision",
+    "@nativescript/tailwind": "*"
+  },
+  "devDependencies": {
+    "@nativescript/visionos": "latest",
+    "svelte-loader": "^3.1.2",
+    "svelte-native": "~1.0.0",
+    "svelte-native-preprocessor": "^1.0.0",
+    "svelte-preprocess": "^5.0.4"
+  }
+}
