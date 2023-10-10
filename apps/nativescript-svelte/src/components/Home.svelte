@@ -1,12 +1,13 @@
 <script lang="ts">
+  import { EventData, View } from '@nativescript/core';
   import { viewBindings } from '@vision/nativescript-data';
-  import Detail from './Detail.svelte'
-  import { navigate } from 'svelte-native'
+  import { navigate } from 'svelte-native';
+  import Detail from './Detail.svelte';
 
   const ui = viewBindings;
 
-  function openDetail(args) {
-    navigate({ page: Detail as any, props: { id: args.object.id } })
+  function openDetail(args: EventData) {
+    navigate({ page: Detail as any, props: { id: (args.object as View).id } });
   }
 </script>
 
