@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import { EventData } from '@nativescript/core';
-import { setupSwiftUI, viewBindings } from '@vision/nativescript-data';
-setupSwiftUI();
+import { $navigateTo } from 'nativescript-vue';
+import { viewBindings } from '@vision/nativescript-data';
+import Detail from './Detail.vue';
 const ui = viewBindings;
-function openDetail(args: EventData) {}
+function openDetail(args: EventData) {
+  $navigateTo(Detail, {
+    props: {
+      id: (args.object as any).id,
+    },
+  });
+}
 </script>
 
 <template>
@@ -31,7 +38,7 @@ function openDetail(args: EventData) {}
           />
         </GridLayout>
 
-        <sui:SwiftUI
+        <SwiftUI
           swiftId="title"
           @swiftUIEvent="ui.onTitleFinished"
           class="align-middle"
@@ -41,7 +48,7 @@ function openDetail(args: EventData) {}
           rows="auto,50"
           columns="auto,30,auto,30,auto"
           class="align-bottom h-center mt-2"
-          @loaded="ui.loadedTOC($event)"
+          @loaded="ui.loadedTOC"
         >
           <StackLayout
             id="globe"
