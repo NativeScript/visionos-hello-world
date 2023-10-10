@@ -1,6 +1,6 @@
 **Develop Vision Pro 🥽 apps with NativeScript** - *A new reality awaits you*
 
-https://github.com/NativeScript/visionos-hello-world/assets/457187/c5ea962e-440f-413a-ae86-29cc9d0c07a1
+https://github.com/NativeScript/visionos-hello-world/assets/457187/458ee1bf-7a21-4e85-9c1f-f613ae22d3a6
 
 - [Setup](#setup)
 - [Choose your preference](#choose-your-preference)
