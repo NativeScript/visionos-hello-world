@@ -23,8 +23,8 @@ export class HomeComponent {
   page = inject(Page);
   nativeDialog = inject(NativeDialogService);
 
-  openDetail() {
-    this.router.navigate(['../detail'], {
+  openDetail(args) {
+    this.router.navigate(['../detail', args.object.id], {
       relativeTo: this.activeRoute
     });
   }

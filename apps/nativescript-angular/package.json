@@ -10,6 +10,6 @@
     "@nativescript/tailwind": "*"
   },
   "devDependencies": {
-    "@nativescript/visionos": "latest"
+    "@nativescript/visionos": "~8.6.0"
   }
 }

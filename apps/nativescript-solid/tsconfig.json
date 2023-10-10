@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "rootDirs": [".", "../.."],
-    "strict": true,
-    "target": "es2017",
+    "target": "es2020",
     "module": "esnext",
     "moduleResolution": "node",
-    "lib": ["es2017", "DOM"],
+    "lib": ["es2020", "DOM"],
     "sourceMap": true,
     "jsx": "preserve",
     "jsxImportSource": "@nativescript-dom/solidjs-types",
@@ -28,9 +26,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
-    "outDir": "dist",
-    "downlevelIteration": true,
-    "maxNodeModuleJsDepth": 5
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["node_modules", "platforms"]

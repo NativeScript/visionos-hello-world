@@ -16,7 +16,7 @@
     "@nativescript/tailwind": "*"
   },
   "devDependencies": {
-    "@nativescript/visionos": "latest",
+    "@nativescript/visionos": "~8.6.0",
     "svelte-loader": "^3.1.2",
     "svelte-native": "~1.0.0",
     "svelte-native-preprocessor": "^1.0.0",

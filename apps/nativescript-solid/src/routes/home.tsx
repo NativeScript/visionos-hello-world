@@ -1,31 +1,21 @@
-import { Dialogs } from '@nativescript/core';
-import { RouteProp } from '@react-navigation/core';
-import * as React from 'react';
+import { EventData, View } from '@nativescript/core';
 import { viewBindings } from '@vision/nativescript-data';
-import { FrameNavigationProp } from 'react-nativescript-navigation';
+import { useRouter } from "../router";
 
-import { MainStackParamList } from '../NavigationParamList';
-
-type ScreenOneProps = {
-  route: RouteProp<MainStackParamList, 'One'>;
-  navigation: FrameNavigationProp<MainStackParamList, 'One'>;
-};
-
-const ui = viewBindings;
-
-export function ScreenOne({ navigation }: ScreenOneProps) {
-  navigation.setOptions({
-    headerShown: false,
-  });
-  const openDetail = (args) => {
-    navigation.navigate("Detail", { id: args.object.id })
+export const Home = () => {
+  const router = useRouter();
+  const ui = viewBindings;
+  const openDetail = (e) => {
+    const id = e.object.id;
+    // router.navigate('Detail', { id });
   };
   return (
     <gridLayout>
-      <gridLayout onLoaded={ui.loadedBg}>
+      <label text="Hello World" style="font-size:40; color:white;" />
+      {/* <gridLayout on:loaded={ui.loadedBg}>
         <image
           src="res://SunSliver"
-          class="align-top w-full"
+          className="align-top w-full"
           iosOverflowSafeArea={true}
           stretch="aspectFit"
           scaleY={1.6}
@@ -34,7 +24,7 @@ export function ScreenOne({ navigation }: ScreenOneProps) {
         />
         <image
           src="res://EarthHalf"
-          class="align-bottom w-full"
+          className="align-bottom w-full"
           iosOverflowSafeArea={true}
           stretch="aspectFill"
           scaleY={2}
@@ -53,13 +43,13 @@ export function ScreenOne({ navigation }: ScreenOneProps) {
         rows="auto,50"
         columns="auto,30,auto,30,auto"
         className="align-bottom h-center mt-2"
-        onLoaded={ui.loadedTOC}
+        on:loaded={ui.loadedTOC}
       >
         <stackLayout
           id="globe"
           col={0}
           width="330"
-          onTap={openDetail}
+          on:tap={openDetail}
           className="p-4"
         >
           <label className="text-[17px] font-semibold text-white/50">
@@ -77,7 +67,7 @@ export function ScreenOne({ navigation }: ScreenOneProps) {
           id="orbit"
           col={2}
           width={330}
-          onTap={openDetail}
+          on:tap={openDetail}
           className="p-4"
         >
           <label className="text-[17px] font-semibold text-white/50">
@@ -95,7 +85,7 @@ export function ScreenOne({ navigation }: ScreenOneProps) {
           id="solar"
           col={4}
           width="330"
-          onTap={openDetail}
+          on:tap={openDetail}
           className="p-4"
         >
           <label className="text-[17px] font-semibold text-white/50">
@@ -108,7 +98,7 @@ export function ScreenOne({ navigation }: ScreenOneProps) {
             {ui.data.abstract('solar')}
           </label>
         </stackLayout>
-      </gridLayout>
+      </gridLayout> */}
     </gridLayout>
   );
-}
+};

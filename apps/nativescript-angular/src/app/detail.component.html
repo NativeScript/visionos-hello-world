@@ -1,6 +1,18 @@
-<GridLayout class="bg-black lala">
-
-  <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png" class="logo-big" sharedTransitionTag="logo"></Image>
-
-  <Button class="close-btn" text="Close" (tap)="close()"></Button>
+<ActionBar [title]="ui.data.eyebrow(id)">
+</ActionBar>
+<GridLayout rows="" columns="">
+  <Image src="res://SolarBackground" stretch="none" class="h-right align-bottom" [hidden]="id !== 'solar'" />
+  <GridLayout columns="*,50,*" class="px-20">
+      <StackLayout col="0" class="align-middle">
+          <Label class="text-[50px] font-bold mt-1">{{ ui.data.heading(id)}}</Label>
+          <Label class="text-[20px] font-semibold mt-3" textWrap="true">{{ ui.data.overview(id)}}</Label>
+          <sui:SwiftUI [swiftId]="id === 'globe' ? 'toggleGlobe' : (id === 'solar' ? 'toggleSolar' : 'toggleOrbit')" class="align-middle" />
+      </StackLayout>
+      <StackLayout col="2" class="align-middle" [hidden]="id === 'orbit'">
+          <Image [src]="id === 'globe' ? 'res://GlobeHero' : 'res://SolarHero'" stretch="none" />
+      </StackLayout>
+      <GridLayout col="2" rows="*" class="align-middle" [hidden]="id !== 'orbit'">
+          <sui:SwiftUI swiftId="orbitModule" [data]="orbitData" class="align-middle w-full h-full mb-8" />
+      </GridLayout>
+  </GridLayout>
 </GridLayout>

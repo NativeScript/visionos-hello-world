@@ -3,7 +3,7 @@
  */
 export type MainStackParamList = {
   One?: {};
-  Two: {
-    message: string;
+  Detail: {
+    id: string;
   };
 };

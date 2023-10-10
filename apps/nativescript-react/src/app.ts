@@ -15,12 +15,13 @@ Object.defineProperty(global, '__DEV__', { value: false });
 // To use swiftUI within JSX
 interface SwiftUIAttrs extends ContentViewAttributes {
     swiftId: string;
-    data: any;
+    data?: any;
+    onSwiftUIEvent?: (args: SwiftUIEventData<any>) => void;
 }
 declare global {
     module JSX {
         interface IntrinsicElements {
-            swiftUI: NativeScriptProps<SwiftUIAttrs, SwiftUI & { onSwiftUIEvent: (args: SwiftUIEventData<any>) => void}>,
+            swiftUI: NativeScriptProps<SwiftUIAttrs, SwiftUI>,
         }
     }
 }

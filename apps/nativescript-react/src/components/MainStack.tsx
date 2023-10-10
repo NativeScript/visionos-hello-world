@@ -17,15 +17,15 @@ export const MainStack = () => (
         <StackNavigator.Navigator
             initialRouteName="Screen One"
             screenOptions={{
-                headerShown: false,
+                headerShown: true,
             }}
         >
             <StackNavigator.Screen
-                name="One"
+                name="Home"
                 component={ScreenOne}
             />
             <StackNavigator.Screen
-                name="Two"
+                name="Detail"
                 component={ScreenTwo}
             />
         </StackNavigator.Navigator>

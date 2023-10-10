@@ -1,4 +1,4 @@
-type DataType = "globe" | "orbit" | "solar";
+export type DataType = "globe" | "orbit" | "solar";
 export class Data {
   static eyebrow(type: DataType) {
     switch (type) {
