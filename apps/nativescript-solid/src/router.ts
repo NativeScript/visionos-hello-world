@@ -1,10 +1,11 @@
 import { createStackRouter, RouteDefinition } from "solid-navigation";
+import { DataType } from "@vision/nativescript-data";
 
 declare module "solid-navigation" {
   export interface Routers {
     Default: {
       Home: RouteDefinition;
-      Detail: RouteDefinition;
+      Detail: RouteDefinition<{ id?: DataType }>;
     };
   }
 }

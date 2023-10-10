@@ -1,18 +1,17 @@
 import { EventData, View } from '@nativescript/core';
-import { viewBindings } from '@vision/nativescript-data';
-import { useRouter } from "../router";
+import { DataType, viewBindings } from '@vision/nativescript-data';
+import { useRouter } from '../router';
 
 export const Home = () => {
   const router = useRouter();
   const ui = viewBindings;
-  const openDetail = (e) => {
-    const id = e.object.id;
-    // router.navigate('Detail', { id });
+  const openDetail = (e: EventData) => {
+    const id = (e.object as View).id as DataType;
+    router.navigate('Detail', { params: { id } });
   };
   return (
-    <gridLayout>
-      <label text="Hello World" style="font-size:40; color:white;" />
-      {/* <gridLayout on:loaded={ui.loadedBg}>
+    <gridlayout>
+      <gridlayout on:loaded={ui.loadedBg}>
         <image
           src="res://SunSliver"
           className="align-top w-full"
@@ -31,21 +30,22 @@ export const Home = () => {
           scaleX={2}
           translateY={540}
         />
-      </gridLayout>
+      </gridlayout>
 
-      <swiftUI
+      <swiftui
         swiftId="title"
-        onSwiftUIEvent={ui.onTitleFinished}
+        on:swiftUIEvent={ui.onTitleFinished}
         className="align-middle"
       />
 
-      <gridLayout
+      <gridlayout
         rows="auto,50"
         columns="auto,30,auto,30,auto"
         className="align-bottom h-center mt-2"
         on:loaded={ui.loadedTOC}
       >
-        <stackLayout
+        <stacklayout
+          // @ts-ignore
           id="globe"
           col={0}
           width="330"
@@ -61,9 +61,10 @@ export const Home = () => {
           <label className="text-[18px] font-semibold mt-2" textWrap="true">
             {ui.data.abstract('globe')}
           </label>
-        </stackLayout>
+        </stacklayout>
 
-        <stackLayout
+        <stacklayout
+          // @ts-ignore
           id="orbit"
           col={2}
           width={330}
@@ -79,9 +80,10 @@ export const Home = () => {
           <label className="text-[18px] font-semibold mt-2" textWrap="true">
             {ui.data.abstract('orbit')}
           </label>
-        </stackLayout>
+        </stacklayout>
 
-        <stackLayout
+        <stacklayout
+          // @ts-ignore
           id="solar"
           col={4}
           width="330"
@@ -97,8 +99,8 @@ export const Home = () => {
           <label className="text-[18px] font-semibold mt-2" textWrap="true">
             {ui.data.abstract('solar')}
           </label>
-        </stackLayout>
-      </gridLayout> */}
-    </gridLayout>
+        </stacklayout>
+      </gridlayout>
+    </gridlayout>
   );
 };
