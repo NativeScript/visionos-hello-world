@@ -3,13 +3,18 @@
   "main": "src/app.ts",
   "version": "1.0.0",
   "private": true,
+  "workspaces": {
+    "nohoist": [
+      "nativescript-vue"
+    ]
+  },
   "dependencies": {
     "@nativescript/core": "vision",
     "@nativescript/swift-ui": "vision"
   },
   "devDependencies": {
     "@nativescript/visionos": "~8.6.0",
-    "nativescript-vue": "^3.0.0-beta.9",
+    "nativescript-vue": "3.0.0-beta.10",
     "vue": "^3.3.4",
     "typescript": "~5.1.6"
   }
