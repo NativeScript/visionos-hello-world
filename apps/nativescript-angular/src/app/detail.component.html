@@ -6,13 +6,13 @@
       <StackLayout col="0" class="align-middle">
           <Label class="text-[50px] font-bold mt-1">{{ ui.data.heading(id)}}</Label>
           <Label class="text-[20px] font-semibold mt-3" textWrap="true">{{ ui.data.overview(id)}}</Label>
-          <sui:SwiftUI [swiftId]="id === 'globe' ? 'toggleGlobe' : (id === 'solar' ? 'toggleSolar' : 'toggleOrbit')" class="align-middle" />
+          <SwiftUI [swiftId]="id === 'globe' ? 'toggleGlobe' : (id === 'solar' ? 'toggleSolar' : 'toggleOrbit')" class="align-middle" />
       </StackLayout>
       <StackLayout col="2" class="align-middle" [hidden]="id === 'orbit'">
           <Image [src]="id === 'globe' ? 'res://GlobeHero' : 'res://SolarHero'" stretch="none" />
       </StackLayout>
       <GridLayout col="2" rows="*" class="align-middle" [hidden]="id !== 'orbit'">
-          <sui:SwiftUI swiftId="orbitModule" [data]="orbitData" class="align-middle w-full h-full mb-8" />
+          <SwiftUI swiftId="orbitModule" [data]="orbitData" class="align-middle w-full h-full mb-8" />
       </GridLayout>
   </GridLayout>
 </GridLayout>
