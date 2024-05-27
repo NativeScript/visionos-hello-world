@@ -9,14 +9,14 @@
     ]
   },
   "dependencies": {
-    "@nativescript/core": "vision",
-    "@nativescript/swift-ui": "vision"
+    "@nativescript/core": "~8.7.0",
+    "@nativescript/swift-ui": "~3.1.0"
   },
   "devDependencies": {
-    "@nativescript/tailwind": "^2.0.1",
-    "@nativescript/visionos": "~8.6.0",
-    "nativescript-vue": "3.0.0-beta.10",
-    "vue": "^3.3.4",
-    "typescript": "~5.1.6"
+    "@nativescript/tailwind": "^2.1.0",
+    "@nativescript/visionos": "~8.7.0",
+    "nativescript-vue": "3.0.0-rc.2",
+    "vue": "^3.4.0",
+    "typescript": "~5.4.0"
   }
 }

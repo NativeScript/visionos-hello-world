@@ -13,7 +13,7 @@ export default {
   cli: {
     packageManager: 'yarn'
   },
-  ios: {
+  visionos: {
     discardUncaughtJsExceptions: false,
     SPMPackages: [
       {

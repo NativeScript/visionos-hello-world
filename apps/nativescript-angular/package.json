@@ -5,11 +5,11 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@nativescript/core": "vision",
-    "@nativescript/swift-ui": "vision",
+    "@nativescript/core": "~8.7.0",
+    "@nativescript/swift-ui": "~3.1.0",
     "@nativescript/tailwind": "*"
   },
   "devDependencies": {
-    "@nativescript/visionos": "~8.6.0"
+    "@nativescript/visionos": "~8.7.0"
   }
 }

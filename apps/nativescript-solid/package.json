@@ -10,14 +10,14 @@
     ]
   },
   "dependencies": {
-    "@nativescript-community/solid-js": "^0.0.4-alpha.5",
-    "@nativescript/core": "vision",
-    "@nativescript/swift-ui": "vision",
+    "@nativescript-community/solid-js": "^0.0.6",
+    "@nativescript/core": "~8.7.0",
+    "@nativescript/swift-ui": "~3.1.0",
     "@nativescript/tailwind": "*",
-    "solid-navigation": "^1.0.0-alpha.8"
+    "solid-navigation": "^1.0.0-alpha.11"
   },
   "devDependencies": {
-    "@nativescript/visionos": "^8.6.0",
-    "typescript": "~5.1.0"
+    "@nativescript/visionos": "^8.7.0",
+    "typescript": "~5.4.0"
   }
 }

@@ -1,20 +1,11 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "vision",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
         "runtimeCacheInputs": [
           "node -v"
-        ],
-        "useDaemonProcess": false
+        ]
       }
     }
   },
@@ -26,13 +17,15 @@
       "inputs": [
         "production",
         "^production"
-      ]
+      ],
+      "cache": true
     },
-    "lint": {
+    "@nx/eslint:lint": {
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json"
-      ]
+      ],
+      "cache": true
     }
   },
   "namedInputs": {
@@ -45,5 +38,7 @@
       "!{projectRoot}/.eslintrc.json"
     ],
     "sharedGlobals": []
-  }
+  },
+  "useDaemonProcess": false,
+  "useInferencePlugins": false
 }

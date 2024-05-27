@@ -11,15 +11,15 @@
     ]
   },
   "dependencies": {
-    "@nativescript/core": "vision",
-    "@nativescript/swift-ui": "vision",
+    "@nativescript/core": "~8.7.0",
+    "@nativescript/swift-ui": "~3.1.0",
     "@nativescript/tailwind": "*"
   },
   "devDependencies": {
-    "@nativescript/visionos": "~8.6.0",
-    "svelte-loader": "^3.1.2",
-    "svelte-native": "~1.0.0",
+    "@nativescript/visionos": "~8.7.0",
+    "svelte-loader": "^3.2.0",
+    "svelte-native": "~1.0.21",
     "svelte-native-preprocessor": "^1.0.0",
-    "svelte-preprocess": "^5.0.4"
+    "svelte-preprocess": "^5.1.4"
   }
 }
